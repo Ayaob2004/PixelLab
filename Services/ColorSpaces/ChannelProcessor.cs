@@ -1,13 +1,14 @@
 ﻿using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
+using PixelLab.Services.ColorSpaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PixelLab.Services
+namespace PixelLab.Services.ColorSpaces
 {
     /// عزل القنوات لكل نظام لوني 
     class ChannelProcessor

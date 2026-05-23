@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PixelLab.Services
+namespace PixelLab.Services.ColorSpaces
 {
     ///دمج لصورة بعد التعديلات
     class ChannelMerger

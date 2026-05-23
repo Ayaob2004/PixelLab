@@ -12,7 +12,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
-namespace PixelLab.Services
+namespace PixelLab.Services.ColorSpaces
 {
     class ColorSystems
     {

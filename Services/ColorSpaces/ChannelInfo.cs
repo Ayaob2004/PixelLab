@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PixelLab.Services
+namespace PixelLab.Services.ColorSpaces
 {
     //معلومات قناة لونية لوحدها 
     class ChannelInfo

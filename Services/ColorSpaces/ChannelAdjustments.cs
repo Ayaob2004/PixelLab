@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PixelLab.Services
+namespace PixelLab.Services.ColorSpaces
 {
     //تعديل  اشرطة المركبات 
     //تعديل عم يكون لكل البكسلات من اجل تعديل  على مركلة واحدة اي قناة واحدة 
