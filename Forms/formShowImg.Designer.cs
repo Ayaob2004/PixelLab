@@ -29,6 +29,7 @@ namespace PixelLab
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formShowImg));
             this.picImg = new System.Windows.Forms.PictureBox();
             this.btnImg = new System.Windows.Forms.Button();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
@@ -40,6 +41,9 @@ namespace PixelLab
             // 
             // picImg
             // 
+            this.picImg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.picImg.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picImg.BackgroundImage")));
+            this.picImg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.picImg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picImg.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picImg.Location = new System.Drawing.Point(0, 0);
@@ -98,7 +102,7 @@ namespace PixelLab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.BackColor = System.Drawing.SystemColors.HighlightText;
             this.ClientSize = new System.Drawing.Size(1132, 624);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnQuantize);

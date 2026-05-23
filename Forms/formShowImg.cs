@@ -59,7 +59,7 @@ namespace PixelLab
                 return;
             }
             Bitmap orginal = new Bitmap(picImg.Image);
-            Bitmap result = quantizeImg.Quantize(orginal, 4);
+            Bitmap result = quantizeImg.Quantize(orginal, 16);
             picImg.Image = result;
 
         }

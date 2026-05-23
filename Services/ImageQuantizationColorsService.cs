@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,186 +11,92 @@ namespace PixelLab.Services
 {
     class ImageQuantizationColorsService
     {
-        public Bitmap Quantize(Bitmap image, int colorCount)
+            public Bitmap Quantize(Bitmap image, int colorCount) {
 
-        {
-            // تحويل الصورة لصيغة 24bit
             Bitmap clone = new Bitmap(image.Width,image.Height, PixelFormat.Format24bppRgb);
 
             using (Graphics g = Graphics.FromImage(clone))
             {
                 g.DrawImage(image, 0, 0);
             }
+            List<Color> palette = AllowColors(clone, colorCount);
 
-            // قراءة الألوان باستخدام LockBits
-            List<Color> pixels = GetPixelsFast(clone);
+            Rectangle rect = new Rectangle(0,0,image.Width, image.Height);
+            BitmapData srcData = clone.LockBits( rect,ImageLockMode.ReadOnly,PixelFormat.Format24bppRgb);
+            Bitmap result = new Bitmap(clone.Width, clone.Height,PixelFormat.Format24bppRgb);
+            BitmapData dstData = result.LockBits( rect, ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
 
-            // Median Cut
-            List<List<Color>> buckets = new List<List<Color>>();
-            buckets.Add(pixels);
+            int bytes = Math.Abs(srcData.Stride) * image.Height;
 
-            while (buckets.Count < colorCount)
-            {
-                List<Color> largest =
-                    buckets.OrderByDescending(b => b.Count).First();
+            byte[] srcBuffer = new byte[bytes];
+            byte[] dstBuffer = new byte[bytes];
 
-                buckets.Remove(largest);
+            
+            Marshal.Copy(srcData.Scan0, srcBuffer, 0,  bytes);
 
-                int rangeR = largest.Max(c => c.R) - largest.Min(c => c.R);
-                int rangeG = largest.Max(c => c.G) - largest.Min(c => c.G);
-                int rangeB = largest.Max(c => c.B) - largest.Min(c => c.B);
 
-                if (rangeR >= rangeG && rangeR >= rangeB)
-                    largest = largest.OrderBy(c => c.R).ToList();
+            int stride = srcData.Stride;
+            int width = clone.Width;
+            int height = clone.Height;
 
-                else if (rangeG >= rangeR && rangeG >= rangeB)
-                    largest = largest.OrderBy(c => c.G).ToList();
+            for (int y = 0; y < height; y++) { 
+                 int row = y * stride;
+                for (int x = 0; x < width; x++) {
+                    int i = row + x * 3;
+                    Color original = Color.FromArgb(srcBuffer[i + 2],  srcBuffer[i + 1],  srcBuffer[i]);
+                    Color nearest = FindNearColor(original, palette);
 
-                else
-                    largest = largest.OrderBy(c => c.B).ToList();
-
-                int mid = largest.Count / 2;
-
-                buckets.Add(largest.Take(mid).ToList());
-                buckets.Add(largest.Skip(mid).ToList());
-            }
-
-            // إنشاء palette
-            List<Color> palette = new List<Color>();
-
-            foreach (var bucket in buckets)
-            {
-                int r = (int)bucket.Average(c => c.R);
-                int g = (int)bucket.Average(c => c.G);
-                int b = (int)bucket.Average(c => c.B);
-
-                palette.Add(Color.FromArgb(r, g, b));
-            }
-
-            // إنشاء الصورة الجديدة
-            Bitmap result =
-                ApplyPaletteFast(clone, palette);
-
-            return result;
-        }
-
-        // ==========================
-        // قراءة البكسلات بسرعة
-        // ==========================
-        private List<Color> GetPixelsFast(Bitmap image)
-        {
-            List<Color> pixels = new List<Color>();
-
-            BitmapData data = image.LockBits(
-                new Rectangle(0, 0, image.Width, image.Height),
-                ImageLockMode.ReadOnly,
-                PixelFormat.Format24bppRgb);
-
-            unsafe
-            {
-                byte* ptr = (byte*)data.Scan0;
-
-                for (int y = 0; y < image.Height; y++)
-                {
-                    byte* row = ptr + (y * data.Stride);
-
-                    for (int x = 0; x < image.Width; x++)
-                    {
-                        int idx = x * 3;
-
-                        byte b = row[idx];
-                        byte g = row[idx + 1];
-                        byte r = row[idx + 2];
-
-                        pixels.Add(Color.FromArgb(r, g, b));
-                    }
+                    dstBuffer[i] = nearest.B;
+                    dstBuffer[i + 1] = nearest.G;
+                    dstBuffer[i + 2] = nearest.R;
                 }
             }
-
-            image.UnlockBits(data);
-
-            return pixels;
-        }
-        private Bitmap ApplyPaletteFast(
-            Bitmap image,
-            List<Color> palette)
-        {
-            Bitmap result = new Bitmap(
-                image.Width,
-                image.Height,
-                PixelFormat.Format24bppRgb);
-
-            BitmapData srcData = image.LockBits(
-                new Rectangle(0, 0, image.Width, image.Height),
-                ImageLockMode.ReadOnly,
-                PixelFormat.Format24bppRgb);
-
-            BitmapData dstData = result.LockBits(
-                new Rectangle(0, 0, result.Width, result.Height),
-                ImageLockMode.WriteOnly,
-                PixelFormat.Format24bppRgb);
-
-            unsafe
-            {
-                byte* src = (byte*)srcData.Scan0;
-                byte* dst = (byte*)dstData.Scan0;
-
-                for (int y = 0; y < image.Height; y++)
-                {
-                    byte* rowSrc = src + (y * srcData.Stride);
-                    byte* rowDst = dst + (y * dstData.Stride);
-
-                    for (int x = 0; x < image.Width; x++)
-                    {
-                        int idx = x * 3;
-
-                        Color pixel = Color.FromArgb(
-                            rowSrc[idx + 2],
-                            rowSrc[idx + 1],
-                            rowSrc[idx]);
-
-                        Color nearest =
-                            FindNearest(pixel, palette);
-
-                        rowDst[idx] = nearest.B;
-                        rowDst[idx + 1] = nearest.G;
-                        rowDst[idx + 2] = nearest.R;
-                    }
-                }
-            }
-
-            image.UnlockBits(srcData);
+            Marshal.Copy(dstBuffer,0,dstData.Scan0, bytes);
+            clone.UnlockBits(srcData);
             result.UnlockBits(dstData);
 
             return result;
-        
-    }
-        private Color FindNearest(
-                Color c,
-                List<Color> palette)
+        }
+
+        private List<Color> AllowColors( Bitmap image,  int colorCount)
+        {
+            Dictionary<Color, int> colorFrequency = new Dictionary<Color, int>();
+
+            for (int y = 0; y < image.Height; y++)
+            {
+                for (int x = 0; x < image.Width; x++)
+                {
+                    Color original =  image.GetPixel(x, y);
+                    int r =  (original.R / 16) * 16;
+                    int g = (original.G / 16) * 16;
+                    int b = (original.B / 16) * 16;
+
+                    Color c =  Color.FromArgb(r, g, b);
+                    if (colorFrequency.ContainsKey(c))
+                        colorFrequency[c]++;
+                    else
+                        colorFrequency[c] = 1;
+                }
+            }
+      List<Color> palette = colorFrequency.OrderByDescending(c => c.Value).Take(colorCount).Select(c => c.Key).ToList();
+
+            return palette;
+        }
+
+        private Color FindNearColor( Color color, List<Color> palette)
         {
             Color best = palette[0];
-
-            double minDist = double.MaxValue;
-
-            foreach (var p in palette)
+            double minDistance =  double.MaxValue;
+            foreach (Color p in palette)
             {
-                double dist =
-                    (c.R - p.R) * (c.R - p.R) +
-                    (c.G - p.G) * (c.G - p.G) +
-                    (c.B - p.B) * (c.B - p.B);
-
-                if (dist < minDist)
+                double distance =  (color.R - p.R) * (color.R - p.R) +(color.G - p.G) * (color.G - p.G) + (color.B - p.B) * (color.B - p.B);
+                if (distance < minDistance)
                 {
-                    minDist = dist;
+                    minDistance = distance;
                     best = p;
                 }
             }
-
             return best;
         }
-
-        //////////////////////////Reham
-        
+       }
     }
-}
