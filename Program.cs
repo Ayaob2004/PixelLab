@@ -16,10 +16,9 @@ namespace PixelLab
         [STAThread]
         static void Main()
         {
-            // Application.EnableVisualStyles();
-            // Application.SetCompatibleTextRenderingDefault(false);
-            // Application.Run(new formShowImg());
-            Console.WriteLine(Environment.Is64BitProcess);
+             Application.EnableVisualStyles();
+             Application.SetCompatibleTextRenderingDefault(false);
+             Application.Run(new formShowImg());
         }
     }
 }
