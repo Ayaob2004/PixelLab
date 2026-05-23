@@ -69,7 +69,7 @@ namespace PixelLab
                 return;
             }
             Bitmap orginal = new Bitmap(picImg.Image);
-            Bitmap result = quantizeImg.Quantize(orginal, 16);
+            Bitmap result = quantizeImg.Quantize(orginal, 24);
             picImg.Image = result;
 
         }
@@ -98,10 +98,7 @@ namespace PixelLab
 
         }
 
-        private void picImg_Click(object sender, EventArgs e)
-        {
-
-        }
+ 
 
         private void ShowImageInfo() {
             if (string.IsNullOrEmpty(currentImagePath) || picImg.Image == null) {
