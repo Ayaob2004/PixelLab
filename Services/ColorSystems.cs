@@ -25,8 +25,8 @@ namespace PixelLab.Services
 
             Rectangle rect = new Rectangle(0, 0, rgbImage.Width, rgbImage.Height);
 
-            BitmapData rgbData = rgbImage.LockBits(rect, ImageLockMode.ReadOnly, rgbImage.PixelFormat);
-            BitmapData cmyData = cmyImage.LockBits(rect, ImageLockMode.WriteOnly, cmyImage.PixelFormat);
+            BitmapData rgbData = rgbImage.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+            BitmapData cmyData = cmyImage.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
 
             int bytes = Math.Abs(rgbData.Stride) * rgbImage.Height;
 
@@ -146,5 +146,8 @@ namespace PixelLab.Services
         }
       
 
+        //////////////////////////////////////////////////////////////////////////////////
+        
+        
     }
 }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using PixelLab.Services;
+using Emgu.CV;
 
 namespace PixelLab
 
@@ -60,6 +61,35 @@ namespace PixelLab
             Bitmap orginal = new Bitmap(picImg.Image);
             Bitmap result = quantizeImg.Quantize(orginal, 4);
             picImg.Image = result;
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+
+            // دالة تجريب 
+
+            String inputPath = "C:\\Users\\XPRISTO\\Downloads\\rehamm.png";
+
+
+            Mat img = CvInvoke.Imread(inputPath);
+            //Bitmap img = new Bitmap(inputPath);
+
+            Mat result = new Mat();
+            //Bitmap result;
+
+            result = ColorSystems.ToYcbcr(img);
+
+            string outputPath = "C:\\Users\\XPRISTO\\Downloads\\rur.png";
+
+            result.Save(outputPath);
+            MessageBox.Show("تم الحفظ بنجاح");
+
+        }
+
+        private void picImg_Click(object sender, EventArgs e)
+        {
 
         }
     }

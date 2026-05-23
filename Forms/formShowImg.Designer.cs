@@ -48,6 +48,7 @@ namespace PixelLab
             this.picImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picImg.TabIndex = 0;
             this.picImg.TabStop = false;
+            this.picImg.Click += new System.EventHandler(this.picImg_Click);
             this.picImg.DragDrop += new System.Windows.Forms.DragEventHandler(this.picImg_DragDrop);
             this.picImg.DragEnter += new System.Windows.Forms.DragEventHandler(this.picImg_DragEnter);
             // 
