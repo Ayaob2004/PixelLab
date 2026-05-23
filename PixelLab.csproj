@@ -158,6 +158,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ColorSystems.cs" />
     <Compile Include="Services\ImageQuantizationColorsService.cs" />
     <Compile Include="Services\Rendering\ColorConversionService.cs" />
     <Compile Include="Services\Rendering\ColorSpaceMode.cs" />
