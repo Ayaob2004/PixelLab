@@ -43,11 +43,13 @@ namespace PixelLab
             this.picImg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picImg.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picImg.Location = new System.Drawing.Point(0, 0);
+            this.picImg.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.picImg.Name = "picImg";
-            this.picImg.Size = new System.Drawing.Size(1132, 624);
+            this.picImg.Size = new System.Drawing.Size(1321, 768);
             this.picImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picImg.TabIndex = 0;
             this.picImg.TabStop = false;
+            this.picImg.Click += new System.EventHandler(this.picImg_Click);
             this.picImg.DragDrop += new System.Windows.Forms.DragEventHandler(this.picImg_DragDrop);
             this.picImg.DragEnter += new System.Windows.Forms.DragEventHandler(this.picImg_DragEnter);
             // 
@@ -55,9 +57,10 @@ namespace PixelLab
             // 
             this.btnImg.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnImg.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImg.Location = new System.Drawing.Point(12, 12);
+            this.btnImg.Location = new System.Drawing.Point(14, 15);
+            this.btnImg.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnImg.Name = "btnImg";
-            this.btnImg.Size = new System.Drawing.Size(134, 35);
+            this.btnImg.Size = new System.Drawing.Size(156, 43);
             this.btnImg.TabIndex = 1;
             this.btnImg.Text = "Select Image";
             this.btnImg.UseVisualStyleBackColor = false;
@@ -75,9 +78,10 @@ namespace PixelLab
             // 
             this.btnQuantize.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnQuantize.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuantize.Location = new System.Drawing.Point(174, 12);
+            this.btnQuantize.Location = new System.Drawing.Point(203, 15);
+            this.btnQuantize.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnQuantize.Name = "btnQuantize";
-            this.btnQuantize.Size = new System.Drawing.Size(134, 35);
+            this.btnQuantize.Size = new System.Drawing.Size(156, 43);
             this.btnQuantize.TabIndex = 2;
             this.btnQuantize.Text = "Qunatize";
             this.btnQuantize.UseVisualStyleBackColor = false;
@@ -85,9 +89,10 @@ namespace PixelLab
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 71);
+            this.button1.Location = new System.Drawing.Point(14, 87);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(134, 23);
+            this.button1.Size = new System.Drawing.Size(156, 28);
             this.button1.TabIndex = 3;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
@@ -95,14 +100,15 @@ namespace PixelLab
             // 
             // formShowImg
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1132, 624);
+            this.ClientSize = new System.Drawing.Size(1321, 768);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnQuantize);
             this.Controls.Add(this.btnImg);
             this.Controls.Add(this.picImg);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "formShowImg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Show Image";
