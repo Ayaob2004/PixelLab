@@ -164,7 +164,6 @@
     <Compile Include="Services\ColorSpaces\ChannelProcessor.cs" />
     <Compile Include="Services\ColorSpaces\ColorSpaceModel.cs" />
     <Compile Include="Services\ColorSpaces\ColorSystems.cs" />
-    <Compile Include="Services\ColorSystems.cs" />
     <Compile Include="Services\ImageInfo.cs" />
     <Compile Include="Services\ImageInfoService.cs" />
     <Compile Include="Services\ImageQuantizationColorsService.cs" />

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using PixelLab.Services;
 using Emgu.CV;
+using PixelLab.Services.ColorSpaces;
 
 namespace PixelLab
 
@@ -148,10 +149,6 @@ namespace PixelLab
                 imageSaveService.SaveImage(picImg.Image, sfd.FileName, format);
                 MessageBox.Show("Image saved successfully.");
             }
-        }
-
-        private void picImg_Click(object sender, EventArgs e) {
-
         }
     }
 }
