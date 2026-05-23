@@ -64,6 +64,7 @@ namespace PixelLab.Forms
         }
 
 
+
         public Form1()
         {
             InitializeComponent();
@@ -82,6 +83,12 @@ namespace PixelLab.Forms
             track_bar_channel3.Visible = false;
             track_bar_channel4.Visible = false;
 
+            checkBox1.Visible = false;
+            checkBox2.Visible = false;
+            checkBox3.Visible = false;
+            checkBox4.Visible = false;
+
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -98,6 +105,11 @@ namespace PixelLab.Forms
             track_bar_channel2.Value = 0;
             track_bar_channel3.Value = 0;
             track_bar_channel4.Value = 0;
+
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            checkBox3.Checked = false;
+            checkBox4.Checked = false;
 
         }
 
@@ -140,7 +152,7 @@ namespace PixelLab.Forms
             {
                 resultBitmap = originalImage;
                 baseModel = ChannelProcessor.GetRGBChannels(inputMat);
-                SetupUI(3, new[] { "Blue", "Green" ,"Red"});
+                SetupUI(baseModel);
                 image_picture_box.Image = resultBitmap;
                 
                 return;
@@ -161,31 +173,31 @@ namespace PixelLab.Forms
                 case "HSV":
                     resultMat = ColorSystems.ToHsv(inputMat);
                     baseModel = ChannelProcessor.GetHSVChannels(inputMat);
-                    SetupUI(3, new[] { "Hue", "Saturation", "Value" });
+                    SetupUI(baseModel);
                     break;
 
                 case "YCbCr":
                     resultMat = ColorSystems.ToYcbcr(inputMat);
-                    /*baseModel = ChannelProcessor.GetYCbCrChannels(inputMat);
-                    SetupUI(3, new[] { "Y", "Cb", "Cr" });*/
+                    baseModel = ChannelProcessor.GetYCbCrChannels(inputMat);
+                    SetupUI(baseModel);
                     break;
 
                 case "YUV":
                     resultMat = ColorSystems.ToYuv(inputMat);
                     baseModel = ChannelProcessor.GetYUVChannels(inputMat);
-                    SetupUI(3, new[] { "Y", "U", "V" });
+                    SetupUI(baseModel);
                     break;
 
                 case "LAB":
                     resultMat = ColorSystems.ToLab(inputMat);
                     baseModel = ChannelProcessor.GetLABChannels(inputMat);
-                    SetupUI(3, new[] { "L", "A", "B" });
+                    SetupUI(baseModel);
                     break;
 
                 case "CMYK":
                     resultMat = ColorSystems.ToCmyk(inputMat);
                     baseModel = ChannelProcessor.GetCMYKChannels(inputMat);
-                    SetupUI(4, new[] { "C", "M", "Y", "K" });
+                    SetupUI(baseModel);
                     break;
             }
             /*if(resultMat == null)
@@ -197,39 +209,50 @@ namespace PixelLab.Forms
                 resultMat.ToImage<Bgr, byte>().ToBitmap();
         }
 
-        private void SetupUI(int count, string[] names)
+        private void SetupUI(ColorSpaceModel m)
         {
             TrackBar[] sliders = {
-        track_bar_channel1,
-        track_bar_channel2,
-        track_bar_channel3,
-        track_bar_channel4
-    };
+                track_bar_channel1,
+                track_bar_channel2,
+                track_bar_channel3,
+                track_bar_channel4
+            };
 
             Label[] labels = {
-        channel1,
-        channel2,
-        channel3,
-        channel4
-    };
+                channel1,
+                channel2,
+                channel3,
+                channel4
+            };
 
-            for (int i = 0; i < count; i++)
+            CheckBox[] checkBoxes =
             {
+                checkBox1,
+                checkBox2,
+                checkBox3,
+                checkBox4
+            };
+            checkBoxes[3].Visible = false;
+
+            for (int i = 0; i < m.Channels.Count; i++)
+            {
+                
+
                 sliders[i].Visible = true;
-                sliders[i].Minimum = -179;
-                sliders[i].Maximum = 179;
-
-                // أهم سطر
-                if (sliders[i].Value < sliders[i].Minimum ||
-                    sliders[i].Value > sliders[i].Maximum)
-                {
-                    sliders[i].Value = 0;
-                }
-
                 labels[i].Visible = true;
-                labels[i].Text = names[i];
+                checkBoxes[i].Visible = true;
+
+                labels[i].Text = m.Channels[i].Name;
+
+                sliders[i].Minimum = m.Channels[i].MinValue;
+                sliders[i].Maximum = m.Channels[i].MaxValue;
+                sliders[i].Value = 0;
+
+                checkBoxes[i].Checked = false;
             }
         }
+
+
 
         private void track_bar_channel1_Scroll_1(object sender, EventArgs e)
         {
@@ -253,7 +276,7 @@ namespace PixelLab.Forms
             ApplyAllAdjustments();
         }
 
-
+        
 
 
         private void channel1_Click(object sender, EventArgs e)
@@ -261,6 +284,74 @@ namespace PixelLab.Forms
 
         }
 
-        
+        private void ApplyWithChannelToggle()
+        {
+            if (baseModel == null) return;
+
+            model = baseModel.Copy();
+
+            // Channel 1
+            if (checkBox1.Checked)
+            {
+                model.Channels[0].Data.SetTo(new MCvScalar(0));
+                track_bar_channel1.Value = 0;
+                track_bar_channel2.Value = 0;
+                track_bar_channel3.Value = 0;
+                track_bar_channel4.Value = 0;
+            }
+
+            // Channel 2
+            if (checkBox2.Checked)
+            {
+                model.Channels[1].Data.SetTo(new MCvScalar(0));
+                track_bar_channel1.Value = 0;
+                track_bar_channel2.Value = 0;
+                track_bar_channel3.Value = 0;
+                track_bar_channel4.Value = 0;
+            }
+
+            // Channel 3
+            if (checkBox3.Checked)
+            {
+                model.Channels[2].Data.SetTo(new MCvScalar(0));
+                track_bar_channel1.Value = 0;
+                track_bar_channel2.Value = 0;
+                track_bar_channel3.Value = 0;
+                track_bar_channel4.Value = 0;
+            }
+
+            // Channel 4
+            if (model.Channels.Count > 3 && checkBox4.Checked)
+            {
+                model.Channels[3].Data.SetTo(new MCvScalar(0));
+                track_bar_channel1.Value = 0;
+                track_bar_channel2.Value = 0;
+                track_bar_channel3.Value = 0;
+                track_bar_channel4.Value = 0;
+            }
+
+            image_picture_box.Image =
+                ChannelMerger.Merge(model).ToBitmap();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            ApplyWithChannelToggle();
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            ApplyWithChannelToggle();
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            ApplyWithChannelToggle();
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            ApplyWithChannelToggle();
+        }
     }
 }

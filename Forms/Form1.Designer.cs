@@ -42,6 +42,10 @@ namespace PixelLab.Forms
             this.track_bar_channel2 = new System.Windows.Forms.TrackBar();
             this.track_bar_channel4 = new System.Windows.Forms.TrackBar();
             this.track_bar_channel3 = new System.Windows.Forms.TrackBar();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.image_picture_box)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.track_bar_channel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.track_bar_channel2)).BeginInit();
@@ -87,7 +91,7 @@ namespace PixelLab.Forms
             "RGB",
             "CMY",
             "HSV",
-            "YcbCr",
+            "YCbCr",
             "YUV",
             "LAB",
             "CMYK"});
@@ -180,12 +184,60 @@ namespace PixelLab.Forms
             this.track_bar_channel3.TabIndex = 13;
             this.track_bar_channel3.Scroll += new System.EventHandler(this.track_bar_channel3_Scroll);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(1170, 54);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(70, 21);
+            this.checkBox1.TabIndex = 14;
+            this.checkBox1.Text = "disable";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(1170, 107);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(70, 21);
+            this.checkBox2.TabIndex = 15;
+            this.checkBox2.Text = "disable";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(1170, 155);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(70, 21);
+            this.checkBox3.TabIndex = 16;
+            this.checkBox3.Text = "disable";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(1170, 213);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(70, 21);
+            this.checkBox4.TabIndex = 17;
+            this.checkBox4.Text = "disable";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.ClientSize = new System.Drawing.Size(1297, 765);
+            this.Controls.Add(this.checkBox4);
+            this.Controls.Add(this.checkBox3);
+            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.track_bar_channel3);
             this.Controls.Add(this.track_bar_channel4);
             this.Controls.Add(this.track_bar_channel2);
@@ -226,5 +278,9 @@ namespace PixelLab.Forms
         private System.Windows.Forms.TrackBar track_bar_channel2;
         private System.Windows.Forms.TrackBar track_bar_channel4;
         private System.Windows.Forms.TrackBar track_bar_channel3;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkBox4;
     }
 }

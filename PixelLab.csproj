@@ -183,6 +183,9 @@
     <Compile Include="Services\Rendering\ColorSpaceMode.cs" />
     <Compile Include="Services\Rendering\ColorSpaceRenderer.cs" />
     <Compile Include="Services\ImageSaveService.cs" />
+    <EmbeddedResource Include="Forms\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\formShowImg.resx">
       <DependentUpon>formShowImg.cs</DependentUpon>
     </EmbeddedResource>
