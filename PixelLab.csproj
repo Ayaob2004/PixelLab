@@ -158,7 +158,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ColorSystems.cs" />
+    <Compile Include="Services\ColorSpaces\ChannelAdjustments.cs" />
+    <Compile Include="Services\ColorSpaces\ChannelInfo.cs" />
+    <Compile Include="Services\ColorSpaces\ChannelMerger.cs" />
+    <Compile Include="Services\ColorSpaces\ChannelProcessor.cs" />
+    <Compile Include="Services\ColorSpaces\ColorSpaceModel.cs" />
+    <Compile Include="Services\ColorSpaces\ColorSystems.cs" />
     <Compile Include="Services\ImageQuantizationColorsService.cs" />
     <Compile Include="Services\Rendering\ColorConversionService.cs" />
     <Compile Include="Services\Rendering\ColorSpaceMode.cs" />

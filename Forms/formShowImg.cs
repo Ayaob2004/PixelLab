@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using PixelLab.Services;
+using Emgu.CV;
 
 namespace PixelLab
 
@@ -65,7 +66,33 @@ namespace PixelLab
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // TODO: اكتبوا هون كود الزر لاحقاً
+
+
+            // دالة تجريب 
+
+            String inputPath = "C:\\Users\\XPRISTO\\Downloads\\rehamm.png";
+
+
+            Mat img = CvInvoke.Imread(inputPath);
+            //Bitmap img = new Bitmap(inputPath);
+
+            Mat result = new Mat();
+            //Bitmap result;
+
+            result = ColorSystems.ToYcbcr(img);
+
+            string outputPath = "C:\\Users\\XPRISTO\\Downloads\\rur.png";
+
+            result.Save(outputPath);
+            MessageBox.Show("تم الحفظ بنجاح");
+
         }
+
+        private void picImg_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }
