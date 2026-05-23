@@ -145,12 +145,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Forms\formShowImg.cs">
-    <Compile Include="ThreeDForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ThreeDForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\formShowImg.Designer.cs">
       <DependentUpon>formShowImg.cs</DependentUpon>
-    <Compile Include="ThreeDForm.Designer.cs">
+    </Compile>
+    <Compile Include="Forms\ThreeDForm.Designer.cs">
       <DependentUpon>ThreeDForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -159,7 +162,7 @@
     <EmbeddedResource Include="Forms\formShowImg.resx">
       <DependentUpon>formShowImg.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ThreeDForm.resx">
+    <EmbeddedResource Include="Forms\ThreeDForm.resx">
       <DependentUpon>ThreeDForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -186,8 +189,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="WPF\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
