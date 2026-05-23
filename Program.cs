@@ -20,6 +20,9 @@ namespace PixelLab
             // Application.SetCompatibleTextRenderingDefault(false);
              Application.Run(new formShowImg());
             Console.WriteLine(Environment.Is64BitProcess);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new ThreeDForm());
         }
     }
 }
