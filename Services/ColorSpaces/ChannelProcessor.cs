@@ -85,25 +85,33 @@ namespace PixelLab.Services.ColorSpaces
         new ChannelInfo()
         {
             Name = "Cyan",
-            Data = cChannel.Mat
+            Data = cChannel.Mat,
+            MinValue = 0,
+            MaxValue = 255
         },
 
         new ChannelInfo()
         {
             Name = "Magenta",
-            Data = mChannel.Mat
+            Data = mChannel.Mat,
+            MinValue = 0,
+             MaxValue = 255
         },
 
         new ChannelInfo()
         {
             Name = "Yellow",
-            Data = yChannel.Mat
+            Data = yChannel.Mat,
+            MinValue = 0,
+            MaxValue = 255
         },
 
         new ChannelInfo()
         {
             Name = "Black",
-            Data = kChannel.Mat
+            Data = kChannel.Mat,
+            MinValue = 0,
+            MaxValue = 255
         }
     };
 
@@ -122,19 +130,25 @@ namespace PixelLab.Services.ColorSpaces
                 new ChannelInfo
                 {
                     Name = "Hue",
-                    Data = splitChannels[0]
+                    Data = splitChannels[0],
+                     MinValue = 0,
+                     MaxValue = 179
                 },
 
                 new ChannelInfo
                 {
                     Name = "Saturation",
-                    Data = splitChannels[1]
+                    Data = splitChannels[1],
+                    MinValue = 0,
+                    MaxValue = 255
                 },
 
                 new ChannelInfo
                 {
                     Name = "Value",
-                    Data = splitChannels[2]
+                    Data = splitChannels[2],
+                    MinValue = 0,
+                     MaxValue = 255
                 }
             };
 
@@ -157,19 +171,25 @@ namespace PixelLab.Services.ColorSpaces
         new ChannelInfo()
         {
             Name = "Blue",
-            Data = splitChannels[0]
+            Data = splitChannels[0],
+            MinValue = 0,
+            MaxValue = 255
         },
 
         new ChannelInfo()
         {
             Name = "Green",
-            Data = splitChannels[1]
+            Data = splitChannels[1],
+            MinValue = 0,
+             MaxValue = 255
         },
 
         new ChannelInfo()
         {
             Name = "Red",
-            Data = splitChannels[2]
+            Data = splitChannels[2],
+            MinValue = 0,
+            MaxValue = 255
         }
     };
 
@@ -195,19 +215,26 @@ namespace PixelLab.Services.ColorSpaces
         new ChannelInfo()
         {
             Name = "Lightness",
-            Data = splitChannels[0]
+            Data = splitChannels[0],
+            MinValue = 0,
+            MaxValue = 255
         },
 
         new ChannelInfo()
         {
             Name = "A Channel",
-            Data = splitChannels[1]
+            Data = splitChannels[1],
+            MinValue = 0,
+            MaxValue = 255
         },
 
         new ChannelInfo()
         {
             Name = "B Channel",
-            Data = splitChannels[2]
+            Data = splitChannels[2],
+            MinValue = 0,
+            MaxValue = 255
+
         }
     };
 
@@ -233,19 +260,27 @@ namespace PixelLab.Services.ColorSpaces
         new ChannelInfo()
         {
             Name = "Y",
-            Data = splitChannels[0]
+            Data = splitChannels[0],
+            MinValue = 0,
+            MaxValue = 255
+
         },
 
         new ChannelInfo()
         {
             Name = "U",
-            Data = splitChannels[1]
+            Data = splitChannels[1],
+            MinValue = 0,
+            MaxValue = 255
+
         },
 
         new ChannelInfo()
         {
             Name = "V",
-            Data = splitChannels[2]
+            Data = splitChannels[2],
+            MinValue = 0,
+            MaxValue = 255
         }
     };
 
@@ -271,19 +306,25 @@ namespace PixelLab.Services.ColorSpaces
         new ChannelInfo()
         {
             Name = "Y",
-            Data = splitChannels[0]
+            Data = splitChannels[0],
+            MinValue = 0,
+            MaxValue = 255
         },
 
         new ChannelInfo()
         {
             Name = "Cb",
-            Data = splitChannels[1]
+            Data = splitChannels[1],
+            MinValue = 0,
+            MaxValue = 255
         },
 
         new ChannelInfo()
         {
             Name = "Cr",
-            Data = splitChannels[2]
+            Data = splitChannels[2],
+            MinValue = 0,
+            MaxValue = 255
         }
     };
 

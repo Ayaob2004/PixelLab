@@ -13,5 +13,7 @@ namespace PixelLab.Services.ColorSpaces
         public string Name { get; set; }
         public Mat Data { get; set; }//  تخزن الصورة لقناة الواحدة(التي نستعرض معلوماته)ا
         public bool Enabled { get; set; } = true;
+        public int MinValue { get; set; }
+        public int MaxValue { get; set; }
     }
 }

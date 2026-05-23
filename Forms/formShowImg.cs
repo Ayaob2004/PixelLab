@@ -150,5 +150,20 @@ namespace PixelLab
                 MessageBox.Show("Image saved successfully.");
             }
         }
+
+        private void picImg_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            //String input = "C:\\Users\\XPRISTO\\Downloads\\rehamm.png";
+           // Mat img= CvInvoke.Imread(input);
+            //Mat result = new Mat();
+           // result = ColorSystems.ToYcbcr(img); 
+           // String output = "C:\\Users\\XPRISTO\\Downloads\\mm.png";
+           // result.Save(output);MessageBox.Show("Done!");
+        }
     }
 }
