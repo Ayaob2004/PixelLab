@@ -16,25 +16,14 @@ namespace PixelLab.Services.ColorSpaces
         ////////////////////////////////////////////////////////////////////////////CMYK
         public static ColorSpaceModel GetCMYKChannels(Mat inputImage)
         {
-            // تحويل الصورة للوصول للبكسلات
+           
             Image<Bgr, byte> img = inputImage.ToImage<Bgr, byte>();
             int width = img.Width;
             int height = img.Height;
-
-            // إنشاء قنوات CMYK
-            Image<Gray, byte> cChannel =
-                new Image<Gray, byte>(width, height);
-
-            Image<Gray, byte> mChannel =
-                new Image<Gray, byte>(width, height);
-
-            Image<Gray, byte> yChannel =
-                new Image<Gray, byte>(width, height);
-
-            Image<Gray, byte> kChannel =
-                new Image<Gray, byte>(width, height);
-
-            // المرور على كل البكسلات
+            Image<Gray, byte> cChannel =new Image<Gray, byte>(width, height);
+            Image<Gray, byte> mChannel =new Image<Gray, byte>(width, height);
+            Image<Gray, byte> yChannel =new Image<Gray, byte>(width, height);
+            Image<Gray, byte> kChannel =new Image<Gray, byte>(width, height);
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
@@ -45,14 +34,11 @@ namespace PixelLab.Services.ColorSpaces
                     double g = pixel.Green / 255.0;
                     double r = pixel.Red / 255.0;
 
-                    // حساب K
+                  
                     double k = 1.0 - Math.Max(r, Math.Max(g, b));
-
                     double c = 0;
                     double m = 0;
                     double yColor = 0;
-
-                    // منع القسمة على صفر
                     if (k < 1.0)
                     {
                         c = (1 - r - k) / (1 - k);
@@ -60,22 +46,15 @@ namespace PixelLab.Services.ColorSpaces
                         yColor = (1 - b - k) / (1 - k);
                     }
 
-                    // تحويل إلى 0-255
-                    cChannel.Data[y, x, 0] =
-                        (byte)(c * 255);
-
-                    mChannel.Data[y, x, 0] =
-                        (byte)(m * 255);
-
-                    yChannel.Data[y, x, 0] =
-                        (byte)(yColor * 255);
-
-                    kChannel.Data[y, x, 0] =
-                        (byte)(k * 255);
+                    
+                    cChannel.Data[y, x, 0] =(byte)(c * 255);
+                    mChannel.Data[y, x, 0] =(byte)(m * 255);
+                    yChannel.Data[y, x, 0] =(byte)(yColor * 255);
+                    kChannel.Data[y, x, 0] =(byte)(k * 255);
                 }
             }
 
-            // إنشاء الموديل النهائي
+          
             ColorSpaceModel model =new ColorSpaceModel();
 
             model.ColorSpaceName = "CMYK";
@@ -87,7 +66,8 @@ namespace PixelLab.Services.ColorSpaces
             Name = "Cyan",
             Data = cChannel.Mat,
             MinValue = 0,
-            MaxValue = 255
+            MaxValue = 255,
+            NeutralValue = 0
         },
 
         new ChannelInfo()
@@ -95,7 +75,8 @@ namespace PixelLab.Services.ColorSpaces
             Name = "Magenta",
             Data = mChannel.Mat,
             MinValue = 0,
-             MaxValue = 255
+            MaxValue = 255,
+            NeutralValue = 0
         },
 
         new ChannelInfo()
@@ -103,7 +84,8 @@ namespace PixelLab.Services.ColorSpaces
             Name = "Yellow",
             Data = yChannel.Mat,
             MinValue = 0,
-            MaxValue = 255
+            MaxValue = 255,
+            NeutralValue = 0
         },
 
         new ChannelInfo()
@@ -111,7 +93,8 @@ namespace PixelLab.Services.ColorSpaces
             Name = "Black",
             Data = kChannel.Mat,
             MinValue = 0,
-            MaxValue = 255
+            MaxValue = 255,
+            NeutralValue = 0
         }
     };
 
@@ -132,7 +115,8 @@ namespace PixelLab.Services.ColorSpaces
                     Name = "Hue",
                     Data = splitChannels[0],
                      MinValue = 0,
-                     MaxValue = 179
+                     MaxValue = 179,
+                     NeutralValue = 0
                 },
 
                 new ChannelInfo
@@ -140,7 +124,8 @@ namespace PixelLab.Services.ColorSpaces
                     Name = "Saturation",
                     Data = splitChannels[1],
                     MinValue = 0,
-                    MaxValue = 255
+                    MaxValue =255 ,
+                    NeutralValue = 0
                 },
 
                 new ChannelInfo
@@ -148,7 +133,8 @@ namespace PixelLab.Services.ColorSpaces
                     Name = "Value",
                     Data = splitChannels[2],
                     MinValue = 0,
-                     MaxValue = 255
+                    MaxValue = 255,
+                    NeutralValue = 0
                 }
             };
 
@@ -173,7 +159,8 @@ namespace PixelLab.Services.ColorSpaces
             Name = "Blue",
             Data = splitChannels[0],
             MinValue = 0,
-            MaxValue = 255
+            MaxValue = 255,
+            NeutralValue = 0
         },
 
         new ChannelInfo()
@@ -181,7 +168,8 @@ namespace PixelLab.Services.ColorSpaces
             Name = "Green",
             Data = splitChannels[1],
             MinValue = 0,
-             MaxValue = 255
+            MaxValue = 255,
+            NeutralValue = 0
         },
 
         new ChannelInfo()
@@ -189,7 +177,8 @@ namespace PixelLab.Services.ColorSpaces
             Name = "Red",
             Data = splitChannels[2],
             MinValue = 0,
-            MaxValue = 255
+            MaxValue = 255,
+            NeutralValue = 0
         }
     };
 
@@ -217,30 +206,36 @@ namespace PixelLab.Services.ColorSpaces
             Name = "Lightness",
             Data = splitChannels[0],
             MinValue = 0,
-            MaxValue = 255
+            MaxValue = 255,
+            NeutralValue = 0
+
+
+
         },
 
         new ChannelInfo()
         {
-            Name = "A Channel",
+            Name = "A (Green - Red)",
             Data = splitChannels[1],
             MinValue = 0,
-            MaxValue = 255
+            MaxValue = 255,
+            NeutralValue = 128
         },
 
         new ChannelInfo()
         {
-            Name = "B Channel",
+            Name = "B (Blue - Yellow)",
             Data = splitChannels[2],
             MinValue = 0,
-            MaxValue = 255
+            MaxValue = 255,
+            NeutralValue = 128
 
         }
     };
 
             return model;
         }
-        ///////////////////////////////////////////////////////////////////////////LAB
+        ///////////////////////////////////////////////////////////////////////////YUV
         public static ColorSpaceModel GetYUVChannels(Mat image)
         {
             Mat yuvImage = ColorSystems.ToYuv(image);
@@ -259,28 +254,31 @@ namespace PixelLab.Services.ColorSpaces
     {
         new ChannelInfo()
         {
-            Name = "Y",
+            Name = "Y (Luma)",
             Data = splitChannels[0],
             MinValue = 0,
-            MaxValue = 255
+            MaxValue = 255,
+            NeutralValue = 0
 
         },
 
         new ChannelInfo()
         {
-            Name = "U",
+            Name = "U (Cb equivalent)",
             Data = splitChannels[1],
             MinValue = 0,
-            MaxValue = 255
+            MaxValue = 255,
+            NeutralValue = 128
 
         },
 
         new ChannelInfo()
         {
-            Name = "V",
+            Name = "V (Cr equivalent)",
             Data = splitChannels[2],
             MinValue = 0,
-            MaxValue = 255
+            MaxValue = 255,
+            NeutralValue = 128
         }
     };
 
@@ -305,26 +303,29 @@ namespace PixelLab.Services.ColorSpaces
     {
         new ChannelInfo()
         {
-            Name = "Y",
+            Name = "Y (Luma)",
             Data = splitChannels[0],
-            MinValue = 0,
-            MaxValue = 255
+            MinValue= 16,
+            MaxValue  = 235,
+            NeutralValue = 16
         },
 
         new ChannelInfo()
         {
-            Name = "Cb",
+            Name = "Cb (Blue Chroma)",
             Data = splitChannels[1],
-            MinValue = 0,
-            MaxValue = 255
+            MinValue = 16,
+            MaxValue = 240,
+            NeutralValue = 128
         },
 
         new ChannelInfo()
         {
-            Name = "Cr",
+            Name = "Cr (Red Chroma)",
             Data = splitChannels[2],
-            MinValue = 0,
-            MaxValue = 255
+            MinValue = 16,
+            MaxValue = 240,
+            NeutralValue = 128
         }
     };
 
