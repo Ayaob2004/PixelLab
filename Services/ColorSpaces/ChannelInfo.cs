@@ -15,5 +15,6 @@ namespace PixelLab.Services.ColorSpaces
         public bool Enabled { get; set; } = true;
         public int MinValue { get; set; }
         public int MaxValue { get; set; }
+        public int NeutralValue { get; set; } = 0;
     }
 }

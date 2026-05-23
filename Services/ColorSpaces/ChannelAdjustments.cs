@@ -19,7 +19,7 @@ namespace PixelLab.Services.ColorSpaces
             {
                 return;
             }
-            model.Channels[channelIndex].Data.SetTo(new MCvScalar(0));
+            model.Channels[channelIndex].Data.SetTo(new MCvScalar(model.Channels[channelIndex].NeutralValue));
             model.Channels[channelIndex].Enabled = false;
         }
 
@@ -33,6 +33,13 @@ namespace PixelLab.Services.ColorSpaces
             }
 
             CvInvoke.Add(model.Channels[channelIndex].Data,new ScalarArray(value),model.Channels[channelIndex].Data);
+            CvInvoke.Threshold(
+                    model.Channels[channelIndex].Data,
+                    model.Channels[channelIndex].Data,
+                    model.Channels[channelIndex].MaxValue,
+                    model.Channels[channelIndex].MaxValue,
+                    Emgu.CV.CvEnum.ThresholdType.Trunc
+                );
         }
     }
 }
