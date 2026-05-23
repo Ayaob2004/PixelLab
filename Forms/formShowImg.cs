@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using PixelLab.Services;
 using Emgu.CV;
+using PixelLab.Services.ColorSpaces;
 
 namespace PixelLab
 
