@@ -12,5 +12,24 @@ namespace PixelLab.Services.ColorSpaces
     {
         public string ColorSpaceName { get; set; }
         public List<ChannelInfo> Channels { get; set; }
+
+        public ColorSpaceModel Copy()
+        {
+            ColorSpaceModel newModel = new ColorSpaceModel();
+
+            newModel.ColorSpaceName = this.ColorSpaceName;
+            newModel.Channels = new List<ChannelInfo>();
+
+            foreach (var ch in this.Channels)
+            {
+                newModel.Channels.Add(new ChannelInfo
+                {
+                    Name = ch.Name,
+                    Data = ch.Data.Clone()   // مهم جدًا
+                });
+            }
+
+            return newModel;
+        }
     }
 }
