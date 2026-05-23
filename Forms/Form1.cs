@@ -232,6 +232,13 @@ namespace PixelLab.Forms
                 checkBox3,
                 checkBox4
             };
+            foreach (var slider in sliders)
+            {
+                slider.Minimum = -255;
+                slider.Maximum = 255;
+                slider.Value = 0;
+            }
+
             checkBoxes[3].Visible = false;
 
             for (int i = 0; i < m.Channels.Count; i++)
@@ -246,7 +253,7 @@ namespace PixelLab.Forms
 
                 sliders[i].Minimum = m.Channels[i].MinValue;
                 sliders[i].Maximum = m.Channels[i].MaxValue;
-                sliders[i].Value = 0;
+                sliders[i].Value = m.Channels[i].MinValue;
 
                 checkBoxes[i].Checked = false;
             }
@@ -290,44 +297,34 @@ namespace PixelLab.Forms
 
             model = baseModel.Copy();
 
-            // Channel 1
+            track_bar_channel1.Value = model.Channels[0].MinValue;
+            track_bar_channel2.Value = model.Channels[1].MinValue;
+            track_bar_channel3.Value = model.Channels[2].MinValue;
+
+            if (model.Channels.Count > 3)
+            {
+                track_bar_channel4.Value = model.Channels[3].MinValue;
+            }
+
+            // تعطيل القنوات حسب الـ checkboxes
             if (checkBox1.Checked)
             {
-                model.Channels[0].Data.SetTo(new MCvScalar(0));
-                track_bar_channel1.Value = 0;
-                track_bar_channel2.Value = 0;
-                track_bar_channel3.Value = 0;
-                track_bar_channel4.Value = 0;
+                ChannelAdjustments.DisableChannel(model, 0);
             }
 
-            // Channel 2
             if (checkBox2.Checked)
             {
-                model.Channels[1].Data.SetTo(new MCvScalar(0));
-                track_bar_channel1.Value = 0;
-                track_bar_channel2.Value = 0;
-                track_bar_channel3.Value = 0;
-                track_bar_channel4.Value = 0;
+                ChannelAdjustments.DisableChannel(model, 1);
             }
 
-            // Channel 3
             if (checkBox3.Checked)
             {
-                model.Channels[2].Data.SetTo(new MCvScalar(0));
-                track_bar_channel1.Value = 0;
-                track_bar_channel2.Value = 0;
-                track_bar_channel3.Value = 0;
-                track_bar_channel4.Value = 0;
+                ChannelAdjustments.DisableChannel(model, 2);
             }
 
-            // Channel 4
             if (model.Channels.Count > 3 && checkBox4.Checked)
             {
-                model.Channels[3].Data.SetTo(new MCvScalar(0));
-                track_bar_channel1.Value = 0;
-                track_bar_channel2.Value = 0;
-                track_bar_channel3.Value = 0;
-                track_bar_channel4.Value = 0;
+                ChannelAdjustments.DisableChannel(model, 3);
             }
 
             image_picture_box.Image =
