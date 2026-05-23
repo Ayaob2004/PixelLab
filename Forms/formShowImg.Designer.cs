@@ -29,8 +29,8 @@ namespace PixelLab
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formShowImg));
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formShowImg));
             this.picImg = new System.Windows.Forms.PictureBox();
             this.btnImg = new System.Windows.Forms.Button();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
@@ -75,13 +75,12 @@ namespace PixelLab
             this.picImg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picImg.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picImg.Location = new System.Drawing.Point(0, 0);
-            this.picImg.Margin = new System.Windows.Forms.Padding(4);
             this.picImg.Name = "picImg";
-            this.picImg.Size = new System.Drawing.Size(1509, 768);
+            this.picImg.Size = new System.Drawing.Size(1028, 609);
             this.picImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picImg.TabIndex = 0;
             this.picImg.TabStop = false;
-            //this.picImg.Click += new System.EventHandler(this.picImg_Click);
+            this.picImg.Click += new System.EventHandler(this.picImg_Click_1);
             this.picImg.DragDrop += new System.Windows.Forms.DragEventHandler(this.picImg_DragDrop);
             this.picImg.DragEnter += new System.Windows.Forms.DragEventHandler(this.picImg_DragEnter);
             // 
@@ -89,10 +88,9 @@ namespace PixelLab
             // 
             this.btnImg.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnImg.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImg.Location = new System.Drawing.Point(16, 15);
-            this.btnImg.Margin = new System.Windows.Forms.Padding(4);
+            this.btnImg.Location = new System.Drawing.Point(12, 12);
             this.btnImg.Name = "btnImg";
-            this.btnImg.Size = new System.Drawing.Size(179, 43);
+            this.btnImg.Size = new System.Drawing.Size(134, 35);
             this.btnImg.TabIndex = 1;
             this.btnImg.Text = "Select Image";
             this.btnImg.UseVisualStyleBackColor = false;
@@ -110,10 +108,9 @@ namespace PixelLab
             // 
             this.btnQuantize.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnQuantize.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuantize.Location = new System.Drawing.Point(232, 15);
-            this.btnQuantize.Margin = new System.Windows.Forms.Padding(4);
+            this.btnQuantize.Location = new System.Drawing.Point(174, 12);
             this.btnQuantize.Name = "btnQuantize";
-            this.btnQuantize.Size = new System.Drawing.Size(179, 43);
+            this.btnQuantize.Size = new System.Drawing.Size(134, 35);
             this.btnQuantize.TabIndex = 2;
             this.btnQuantize.Text = "Qunatize";
             this.btnQuantize.UseVisualStyleBackColor = false;
@@ -121,13 +118,13 @@ namespace PixelLab
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(16, 87);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Location = new System.Drawing.Point(12, 71);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(179, 28);
+            this.button1.Size = new System.Drawing.Size(134, 23);
             this.button1.TabIndex = 3;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // grpImageInfo
             // 
@@ -153,198 +150,221 @@ namespace PixelLab
             this.grpImageInfo.Controls.Add(this.format);
             this.grpImageInfo.Controls.Add(this.path);
             this.grpImageInfo.Controls.Add(this.fileName);
-            this.grpImageInfo.Location = new System.Drawing.Point(1197, 12);
+            this.grpImageInfo.Location = new System.Drawing.Point(898, 10);
+            this.grpImageInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.grpImageInfo.Name = "grpImageInfo";
-            this.grpImageInfo.Size = new System.Drawing.Size(300, 217);
+            this.grpImageInfo.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpImageInfo.Size = new System.Drawing.Size(225, 176);
             this.grpImageInfo.TabIndex = 4;
             this.grpImageInfo.TabStop = false;
             // 
             // lblAspectRatioValue
             // 
             this.lblAspectRatioValue.AutoSize = true;
-            this.lblAspectRatioValue.Location = new System.Drawing.Point(138, 66);
+            this.lblAspectRatioValue.Location = new System.Drawing.Point(104, 54);
+            this.lblAspectRatioValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblAspectRatioValue.Name = "lblAspectRatioValue";
-            this.lblAspectRatioValue.Size = new System.Drawing.Size(11, 16);
+            this.lblAspectRatioValue.Size = new System.Drawing.Size(11, 13);
             this.lblAspectRatioValue.TabIndex = 21;
             this.lblAspectRatioValue.Text = "-";
             // 
             // lblLastModifiedValue
             // 
             this.lblLastModifiedValue.AutoSize = true;
-            this.lblLastModifiedValue.Location = new System.Drawing.Point(138, 178);
+            this.lblLastModifiedValue.Location = new System.Drawing.Point(104, 145);
+            this.lblLastModifiedValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblLastModifiedValue.Name = "lblLastModifiedValue";
-            this.lblLastModifiedValue.Size = new System.Drawing.Size(11, 16);
+            this.lblLastModifiedValue.Size = new System.Drawing.Size(11, 13);
             this.lblLastModifiedValue.TabIndex = 19;
             this.lblLastModifiedValue.Text = "-";
             // 
             // lblColorDepthValue
             // 
             this.lblColorDepthValue.AutoSize = true;
-            this.lblColorDepthValue.Location = new System.Drawing.Point(138, 162);
+            this.lblColorDepthValue.Location = new System.Drawing.Point(104, 132);
+            this.lblColorDepthValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblColorDepthValue.Name = "lblColorDepthValue";
-            this.lblColorDepthValue.Size = new System.Drawing.Size(11, 16);
+            this.lblColorDepthValue.Size = new System.Drawing.Size(11, 13);
             this.lblColorDepthValue.TabIndex = 18;
             this.lblColorDepthValue.Text = "-";
             // 
             // aspectRatio
             // 
             this.aspectRatio.AutoSize = true;
-            this.aspectRatio.Location = new System.Drawing.Point(6, 66);
+            this.aspectRatio.Location = new System.Drawing.Point(4, 54);
+            this.aspectRatio.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.aspectRatio.Name = "aspectRatio";
-            this.aspectRatio.Size = new System.Drawing.Size(90, 16);
+            this.aspectRatio.Size = new System.Drawing.Size(75, 13);
             this.aspectRatio.TabIndex = 20;
             this.aspectRatio.Text = "Aspect Ratio :";
             // 
             // lblPixelFormatValue
             // 
             this.lblPixelFormatValue.AutoSize = true;
-            this.lblPixelFormatValue.Location = new System.Drawing.Point(138, 146);
+            this.lblPixelFormatValue.Location = new System.Drawing.Point(104, 119);
+            this.lblPixelFormatValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPixelFormatValue.Name = "lblPixelFormatValue";
-            this.lblPixelFormatValue.Size = new System.Drawing.Size(11, 16);
+            this.lblPixelFormatValue.Size = new System.Drawing.Size(11, 13);
             this.lblPixelFormatValue.TabIndex = 17;
             this.lblPixelFormatValue.Text = "-";
             // 
             // lblDpiValue
             // 
             this.lblDpiValue.AutoSize = true;
-            this.lblDpiValue.Location = new System.Drawing.Point(138, 130);
+            this.lblDpiValue.Location = new System.Drawing.Point(104, 106);
+            this.lblDpiValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDpiValue.Name = "lblDpiValue";
-            this.lblDpiValue.Size = new System.Drawing.Size(11, 16);
+            this.lblDpiValue.Size = new System.Drawing.Size(11, 13);
             this.lblDpiValue.TabIndex = 16;
             this.lblDpiValue.Text = "-";
             // 
             // lblPixelCountValue
             // 
             this.lblPixelCountValue.AutoSize = true;
-            this.lblPixelCountValue.Location = new System.Drawing.Point(138, 114);
+            this.lblPixelCountValue.Location = new System.Drawing.Point(104, 93);
+            this.lblPixelCountValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPixelCountValue.Name = "lblPixelCountValue";
-            this.lblPixelCountValue.Size = new System.Drawing.Size(11, 16);
+            this.lblPixelCountValue.Size = new System.Drawing.Size(11, 13);
             this.lblPixelCountValue.TabIndex = 15;
             this.lblPixelCountValue.Text = "-";
             // 
             // lblFileSizeValue
             // 
             this.lblFileSizeValue.AutoSize = true;
-            this.lblFileSizeValue.Location = new System.Drawing.Point(138, 97);
+            this.lblFileSizeValue.Location = new System.Drawing.Point(104, 79);
+            this.lblFileSizeValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblFileSizeValue.Name = "lblFileSizeValue";
-            this.lblFileSizeValue.Size = new System.Drawing.Size(11, 16);
+            this.lblFileSizeValue.Size = new System.Drawing.Size(11, 13);
             this.lblFileSizeValue.TabIndex = 14;
             this.lblFileSizeValue.Text = "-";
             // 
             // lblDimensionsValue
             // 
             this.lblDimensionsValue.AutoSize = true;
-            this.lblDimensionsValue.Location = new System.Drawing.Point(138, 81);
+            this.lblDimensionsValue.Location = new System.Drawing.Point(104, 66);
+            this.lblDimensionsValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDimensionsValue.Name = "lblDimensionsValue";
-            this.lblDimensionsValue.Size = new System.Drawing.Size(11, 16);
+            this.lblDimensionsValue.Size = new System.Drawing.Size(11, 13);
             this.lblDimensionsValue.TabIndex = 13;
             this.lblDimensionsValue.Text = "-";
             // 
             // lblFormatValue
             // 
             this.lblFormatValue.AutoSize = true;
-            this.lblFormatValue.Location = new System.Drawing.Point(138, 52);
+            this.lblFormatValue.Location = new System.Drawing.Point(104, 42);
+            this.lblFormatValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblFormatValue.Name = "lblFormatValue";
-            this.lblFormatValue.Size = new System.Drawing.Size(11, 16);
+            this.lblFormatValue.Size = new System.Drawing.Size(11, 13);
             this.lblFormatValue.TabIndex = 12;
             this.lblFormatValue.Text = "-";
             // 
             // lblPathValue
             // 
             this.lblPathValue.AutoEllipsis = true;
-            this.lblPathValue.Location = new System.Drawing.Point(138, 36);
+            this.lblPathValue.Location = new System.Drawing.Point(104, 29);
+            this.lblPathValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPathValue.Name = "lblPathValue";
-            this.lblPathValue.Size = new System.Drawing.Size(156, 16);
+            this.lblPathValue.Size = new System.Drawing.Size(117, 13);
             this.lblPathValue.TabIndex = 11;
             this.lblPathValue.Text = "-";
             // 
             // lblFileNameValue
             // 
             this.lblFileNameValue.AutoEllipsis = true;
-            this.lblFileNameValue.Location = new System.Drawing.Point(138, 20);
+            this.lblFileNameValue.Location = new System.Drawing.Point(104, 16);
+            this.lblFileNameValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblFileNameValue.Name = "lblFileNameValue";
-            this.lblFileNameValue.Size = new System.Drawing.Size(156, 16);
+            this.lblFileNameValue.Size = new System.Drawing.Size(117, 13);
             this.lblFileNameValue.TabIndex = 10;
             this.lblFileNameValue.Text = "-";
             // 
             // lastModified
             // 
             this.lastModified.AutoSize = true;
-            this.lastModified.Location = new System.Drawing.Point(6, 178);
+            this.lastModified.Location = new System.Drawing.Point(4, 145);
+            this.lastModified.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lastModified.Name = "lastModified";
-            this.lastModified.Size = new System.Drawing.Size(93, 16);
+            this.lastModified.Size = new System.Drawing.Size(77, 13);
             this.lastModified.TabIndex = 9;
             this.lastModified.Text = "Last Modified :";
             // 
             // colorDepth
             // 
             this.colorDepth.AutoSize = true;
-            this.colorDepth.Location = new System.Drawing.Point(6, 162);
+            this.colorDepth.Location = new System.Drawing.Point(4, 132);
+            this.colorDepth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.colorDepth.Name = "colorDepth";
-            this.colorDepth.Size = new System.Drawing.Size(84, 16);
+            this.colorDepth.Size = new System.Drawing.Size(71, 13);
             this.colorDepth.TabIndex = 8;
             this.colorDepth.Text = "Color Depth :";
             // 
             // pixelFormat
             // 
             this.pixelFormat.AutoSize = true;
-            this.pixelFormat.Location = new System.Drawing.Point(6, 146);
+            this.pixelFormat.Location = new System.Drawing.Point(4, 119);
+            this.pixelFormat.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.pixelFormat.Name = "pixelFormat";
-            this.pixelFormat.Size = new System.Drawing.Size(87, 16);
+            this.pixelFormat.Size = new System.Drawing.Size(73, 13);
             this.pixelFormat.TabIndex = 7;
             this.pixelFormat.Text = "Pixel Format :";
             // 
             // dpi
             // 
             this.dpi.AutoSize = true;
-            this.dpi.Location = new System.Drawing.Point(6, 130);
+            this.dpi.Location = new System.Drawing.Point(4, 106);
+            this.dpi.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.dpi.Name = "dpi";
-            this.dpi.Size = new System.Drawing.Size(35, 16);
+            this.dpi.Size = new System.Drawing.Size(31, 13);
             this.dpi.TabIndex = 6;
             this.dpi.Text = "DPI :";
             // 
             // pixelCount
             // 
             this.pixelCount.AutoSize = true;
-            this.pixelCount.Location = new System.Drawing.Point(6, 114);
+            this.pixelCount.Location = new System.Drawing.Point(4, 93);
+            this.pixelCount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.pixelCount.Name = "pixelCount";
-            this.pixelCount.Size = new System.Drawing.Size(79, 16);
+            this.pixelCount.Size = new System.Drawing.Size(68, 13);
             this.pixelCount.TabIndex = 5;
             this.pixelCount.Text = "Pixel Count :";
             // 
             // fileSize
             // 
             this.fileSize.AutoSize = true;
-            this.fileSize.Location = new System.Drawing.Point(6, 98);
+            this.fileSize.Location = new System.Drawing.Point(4, 80);
+            this.fileSize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.fileSize.Name = "fileSize";
-            this.fileSize.Size = new System.Drawing.Size(64, 16);
+            this.fileSize.Size = new System.Drawing.Size(52, 13);
             this.fileSize.TabIndex = 4;
             this.fileSize.Text = "File Size :";
             // 
             // dimensions
             // 
             this.dimensions.AutoSize = true;
-            this.dimensions.Location = new System.Drawing.Point(6, 82);
+            this.dimensions.Location = new System.Drawing.Point(4, 67);
+            this.dimensions.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.dimensions.Name = "dimensions";
-            this.dimensions.Size = new System.Drawing.Size(84, 16);
+            this.dimensions.Size = new System.Drawing.Size(67, 13);
             this.dimensions.TabIndex = 3;
             this.dimensions.Text = "Dimensions :";
             // 
             // format
             // 
             this.format.AutoSize = true;
-            this.format.Location = new System.Drawing.Point(6, 50);
+            this.format.Location = new System.Drawing.Point(4, 41);
+            this.format.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.format.Name = "format";
-            this.format.Size = new System.Drawing.Size(55, 16);
+            this.format.Size = new System.Drawing.Size(48, 13);
             this.format.TabIndex = 2;
             this.format.Text = "Format :";
             // 
             // path
             // 
             this.path.AutoSize = true;
-            this.path.Location = new System.Drawing.Point(6, 34);
+            this.path.Location = new System.Drawing.Point(4, 28);
+            this.path.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.path.Name = "path";
-            this.path.Size = new System.Drawing.Size(40, 16);
+            this.path.Size = new System.Drawing.Size(36, 13);
             this.path.TabIndex = 1;
             this.path.Text = "Path :";
             // 
@@ -352,9 +372,10 @@ namespace PixelLab
             // 
             this.fileName.AutoSize = true;
             this.fileName.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.fileName.Location = new System.Drawing.Point(6, 18);
+            this.fileName.Location = new System.Drawing.Point(4, 15);
+            this.fileName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.fileName.Name = "fileName";
-            this.fileName.Size = new System.Drawing.Size(75, 16);
+            this.fileName.Size = new System.Drawing.Size(60, 13);
             this.fileName.TabIndex = 0;
             this.fileName.Text = "File Name :";
             // 
@@ -362,10 +383,9 @@ namespace PixelLab
             // 
             this.btnSaveImage.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnSaveImage.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveImage.Location = new System.Drawing.Point(451, 15);
-            this.btnSaveImage.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSaveImage.Location = new System.Drawing.Point(338, 12);
             this.btnSaveImage.Name = "btnSaveImage";
-            this.btnSaveImage.Size = new System.Drawing.Size(179, 43);
+            this.btnSaveImage.Size = new System.Drawing.Size(134, 35);
             this.btnSaveImage.TabIndex = 5;
             this.btnSaveImage.Text = "Save Image";
             this.btnSaveImage.UseVisualStyleBackColor = false;
@@ -373,19 +393,16 @@ namespace PixelLab
             // 
             // formShowImg
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.ClientSize = new System.Drawing.Size(1132, 624);
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1509, 768);
+            this.ClientSize = new System.Drawing.Size(1028, 609);
             this.Controls.Add(this.btnSaveImage);
             this.Controls.Add(this.grpImageInfo);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnQuantize);
             this.Controls.Add(this.btnImg);
             this.Controls.Add(this.picImg);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "formShowImg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Show Image";
