@@ -20,6 +20,7 @@ namespace PixelLab
         private ImageQuantizationColorsService quantizeImg = new ImageQuantizationColorsService();
         private ImageInfoService imageInfoService = new ImageInfoService();
         private ImageSaveService imageSaveService = new ImageSaveService();
+        private Bitmap orginalImage;
         public formShowImg()
         {
             InitializeComponent();
@@ -46,7 +47,8 @@ namespace PixelLab
         private void picImg_DragDrop(object sender, DragEventArgs e)
         {
             currentImagePath = files[0];
-            picImg.Image = Image.FromFile(currentImagePath);
+            orginalImage = new Bitmap(currentImagePath);
+            picImg.Image = new Bitmap(orginalImage);
             ShowImageInfo();
         }
         private void btnImg_Click(object sender, EventArgs e)
@@ -56,7 +58,8 @@ namespace PixelLab
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 currentImagePath = ofd.FileName;
-                picImg.Image = Image.FromFile(currentImagePath);
+                orginalImage = new Bitmap(currentImagePath);
+                picImg.Image = new Bitmap(orginalImage);
                 ShowImageInfo();
             }
         }
@@ -74,31 +77,25 @@ namespace PixelLab
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ColorCount_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (picImg.Image == null)
+            {
+                MessageBox.Show("Please select an image first.");
+                return;
+            }
+            if (ColorCount.SelectedIndex == 0)
+            {
+                return;
+            }
+            int colorCount = int.Parse(ColorCount.SelectedItem.ToString());
 
-
-            // دالة تجريب 
-
-            String inputPath = "C:\\Users\\XPRISTO\\Downloads\\rehamm.png";
-
-
-            Mat img = CvInvoke.Imread(inputPath);
-            //Bitmap img = new Bitmap(inputPath);
-
-            Mat result = new Mat();
-            //Bitmap result;
-
-            result = ColorSystems.ToYcbcr(img);
-
-            string outputPath = "C:\\Users\\XPRISTO\\Downloads\\rur.png";
-
-            result.Save(outputPath);
-            MessageBox.Show("تم الحفظ بنجاح");
-
+            Bitmap result = quantizeImg.Quantize(orginalImage, colorCount);
+            picImg.Image = result;
         }
 
- 
+
+
 
         private void ShowImageInfo() {
             if (string.IsNullOrEmpty(currentImagePath) || picImg.Image == null) {
@@ -153,14 +150,6 @@ namespace PixelLab
 
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            //String input = "C:\\Users\\XPRISTO\\Downloads\\rehamm.png";
-           // Mat img= CvInvoke.Imread(input);
-            //Mat result = new Mat();
-           // result = ColorSystems.ToYcbcr(img); 
-           // String output = "C:\\Users\\XPRISTO\\Downloads\\mm.png";
-           // result.Save(output);MessageBox.Show("Done!");
-        }
+   
     }
 }

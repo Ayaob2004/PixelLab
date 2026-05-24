@@ -13,10 +13,7 @@ using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
 using PixelLab.Services.ColorSpaces;
-
-
-
-
+using System.IO;
 
 namespace PixelLab.Forms
 {
@@ -93,7 +90,7 @@ namespace PixelLab.Forms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            image_picture_box.AllowDrop = true;
         }
 
         private void reset_button_Click(object sender, EventArgs e)
@@ -349,6 +346,26 @@ namespace PixelLab.Forms
         private void checkBox4_CheckedChanged(object sender, EventArgs e)
         {
             ApplyWithChannelToggle();
+        }
+        string[] files = null;
+
+        private string currentImagePath = "";
+        private void image_picture_box_DragEnter(object sender, DragEventArgs e)
+        {
+            files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            string pathExImg = Path.GetExtension(files[0]);
+            if ((pathExImg == ".jpg" || pathExImg == ".png") && files.Count() == 1)
+            {
+                e.Effect = DragDropEffects.All;
+            }
+        }
+        private Bitmap orginalImage;
+        private void image_picture_box_DragDrop(object sender, DragEventArgs e)
+        {
+            currentImagePath = files[0];
+            orginalImage = new Bitmap(currentImagePath);
+            image_picture_box.Image = new Bitmap(orginalImage);
+            
         }
     }
 }
