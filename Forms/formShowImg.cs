@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using PixelLab.Services;
 using Emgu.CV;
+using PixelLab.Services.ColorSpaces;
 
 namespace PixelLab
 
@@ -59,7 +60,7 @@ namespace PixelLab
                 return;
             }
             Bitmap orginal = new Bitmap(picImg.Image);
-            Bitmap result = quantizeImg.Quantize(orginal, 16);
+            Bitmap result = quantizeImg.Quantize(orginal, 24);
             picImg.Image = result;
 
         }
@@ -88,10 +89,7 @@ namespace PixelLab
 
         }
 
-        private void picImg_Click(object sender, EventArgs e)
-        {
-
-        }
+ 
 
         
     }
