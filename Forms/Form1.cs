@@ -23,6 +23,14 @@ namespace PixelLab.Forms
 
         ColorSpaceModel model;
         ColorSpaceModel baseModel;
+
+        private ImageInfoService imageInfoService = new ImageInfoService();
+        private ImageSaveService imageSaveService = new ImageSaveService();
+
+        string[] files = null;
+
+        private string currentImagePath = "";
+
         private void ApplyAllAdjustments()
         {
             if (baseModel == null) return;
@@ -69,6 +77,8 @@ namespace PixelLab.Forms
             reset_button.Visible = false;
             color_systems.Visible = false;
             label1.Visible = false;//choose a color system label
+            btnSaveImage.Visible = false;
+            grpImageInfo.Visible = false;
 
             channel1.Visible = false;
             channel2.Visible = false;
@@ -110,6 +120,27 @@ namespace PixelLab.Forms
 
         }
 
+        private void image_picture_box_DragEnter(object sender, DragEventArgs e) {
+            files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            string pathExImg = Path.GetExtension(files[0]);
+            if ((pathExImg == ".jpg" || pathExImg == ".png") && files.Count() == 1) {
+                e.Effect = DragDropEffects.All;
+            }
+        }
+
+        private void image_picture_box_DragDrop(object sender, DragEventArgs e) {
+            currentImagePath = files[0];
+            originalImage = new Bitmap(currentImagePath);
+            image_picture_box.Image = new Bitmap(originalImage);
+
+            reset_button.Visible = true;
+            btnSaveImage.Visible = true;
+            color_systems.Visible = true;
+            grpImageInfo.Visible = true;
+
+            ShowImageInfo();
+        }
+
         private void select_image_button_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -118,14 +149,19 @@ namespace PixelLab.Forms
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                Bitmap img = new Bitmap(ofd.FileName);
+                currentImagePath = ofd.FileName;
+
+                Bitmap img = new Bitmap(currentImagePath);
 
                 originalImage = new Bitmap(img);
-                image_picture_box.Image = originalImage;
-                select_image_button.Visible = false;
-                reset_button.Visible = true;
-                color_systems.Visible = true;
+                image_picture_box.Image = new Bitmap(originalImage);
 
+                reset_button.Visible = true;
+                btnSaveImage.Visible = true;
+                color_systems.Visible = true;
+                grpImageInfo.Visible = true;
+
+                ShowImageInfo();
             }
         }
 
@@ -197,10 +233,6 @@ namespace PixelLab.Forms
                     SetupUI(baseModel);
                     break;
             }
-            /*if(resultMat == null)
-            {
-                MessageBox.Show("Color system not supported or failed conversion");
-            }*/
 
             image_picture_box.Image =
                 resultMat.ToImage<Bgr, byte>().ToBitmap();
@@ -347,25 +379,60 @@ namespace PixelLab.Forms
         {
             ApplyWithChannelToggle();
         }
-        string[] files = null;
 
-        private string currentImagePath = "";
-        private void image_picture_box_DragEnter(object sender, DragEventArgs e)
-        {
-            files = (string[])e.Data.GetData(DataFormats.FileDrop);
-            string pathExImg = Path.GetExtension(files[0]);
-            if ((pathExImg == ".jpg" || pathExImg == ".png") && files.Count() == 1)
-            {
-                e.Effect = DragDropEffects.All;
+
+        private void ShowImageInfo() {
+            if (string.IsNullOrEmpty(currentImagePath) || image_picture_box.Image == null) {
+                return;
+            }
+
+            ImageInfo info = imageInfoService.GetImageInfo(currentImagePath, image_picture_box.Image);
+
+            lblFileNameValue.Text = info.FileName;
+            lblPathValue.Text = info.Path;
+            lblFormatValue.Text = info.Format;
+            lblAspectRatioValue.Text = info.AspectRatio;
+            lblDimensionsValue.Text = info.Dimensions;
+            lblFileSizeValue.Text = info.FileSize;
+            lblPixelCountValue.Text = info.PixelCount;
+            lblDpiValue.Text = info.Dpi;
+            lblPixelFormatValue.Text = info.PixelFormat;
+            lblColorDepthValue.Text = info.ColorDepth;
+            lblLastModifiedValue.Text = info.LastModified;
+
+            toolTip1.SetToolTip(lblFileNameValue, info.FileName);
+            toolTip1.SetToolTip(lblPathValue, info.Path);
+        }
+
+        private void btnSaveImage_Click(object sender, EventArgs e) {
+            if (image_picture_box.Image == null) {
+                MessageBox.Show("Please select an image first.");
+                return;
+            }
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Title = "Save Image";
+            sfd.Filter = "PNG Image|*.png|JPEG Image|*.jpg|Bitmap Image|*.bmp";
+            sfd.FileName = "edited_image";
+
+            if (sfd.ShowDialog() == DialogResult.OK) {
+                System.Drawing.Imaging.ImageFormat format;
+                string extension = Path.GetExtension(sfd.FileName).ToLower();
+                if (extension == ".jpg") {
+                    format = System.Drawing.Imaging.ImageFormat.Jpeg;
+                } else if (extension == ".bmp") {
+                    format = System.Drawing.Imaging.ImageFormat.Bmp;
+                } else {
+                    format = System.Drawing.Imaging.ImageFormat.Png;
+                }
+                imageSaveService.SaveImage(image_picture_box.Image, sfd.FileName, format);
+                MessageBox.Show("Image saved successfully.");
             }
         }
-        private Bitmap orginalImage;
-        private void image_picture_box_DragDrop(object sender, DragEventArgs e)
-        {
-            currentImagePath = files[0];
-            orginalImage = new Bitmap(currentImagePath);
-            image_picture_box.Image = new Bitmap(orginalImage);
-            
+
+        private void image_picture_box_Click(object sender, EventArgs e) {
+
         }
+
     }
 }
