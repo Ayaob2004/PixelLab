@@ -72,6 +72,8 @@ namespace PixelLab.Forms
             this.fileName = new System.Windows.Forms.Label();
             this.btnSaveImage = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.ColorCount = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.image_picture_box)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.track_bar_channel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.track_bar_channel2)).BeginInit();
@@ -519,12 +521,45 @@ namespace PixelLab.Forms
             this.btnSaveImage.UseVisualStyleBackColor = false;
             this.btnSaveImage.Click += new System.EventHandler(this.btnSaveImage_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(1125, 275);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(183, 28);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "Select Count Colors";
+            // 
+            // ColorCount
+            // 
+            this.ColorCount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ColorCount.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ColorCount.FormattingEnabled = true;
+            this.ColorCount.Items.AddRange(new object[] {
+            "4",
+            "8",
+            "16",
+            "32",
+            "64",
+            "128",
+            "256"});
+            this.ColorCount.Location = new System.Drawing.Point(1166, 317);
+            this.ColorCount.Margin = new System.Windows.Forms.Padding(4);
+            this.ColorCount.Name = "ColorCount";
+            this.ColorCount.Size = new System.Drawing.Size(95, 33);
+            this.ColorCount.TabIndex = 21;
+            this.ColorCount.SelectedIndexChanged += new System.EventHandler(this.ColorCount_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.ClientSize = new System.Drawing.Size(1483, 766);
+            this.Controls.Add(this.ColorCount);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnSaveImage);
             this.Controls.Add(this.grpImageInfo);
             this.Controls.Add(this.checkBox4);
@@ -603,5 +638,7 @@ namespace PixelLab.Forms
         private System.Windows.Forms.Label fileName;
         private System.Windows.Forms.Button btnSaveImage;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox ColorCount;
     }
 }

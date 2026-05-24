@@ -24,6 +24,7 @@ namespace PixelLab.Forms
         ColorSpaceModel model;
         ColorSpaceModel baseModel;
 
+        private ImageQuantizationColorsService quantizeImg = new ImageQuantizationColorsService();
         private ImageInfoService imageInfoService = new ImageInfoService();
         private ImageSaveService imageSaveService = new ImageSaveService();
 
@@ -79,6 +80,8 @@ namespace PixelLab.Forms
             label1.Visible = false;//choose a color system label
             btnSaveImage.Visible = false;
             grpImageInfo.Visible = false;
+            label2.Visible = false;
+            ColorCount.Visible = false;
 
             channel1.Visible = false;
             channel2.Visible = false;
@@ -137,6 +140,8 @@ namespace PixelLab.Forms
             btnSaveImage.Visible = true;
             color_systems.Visible = true;
             grpImageInfo.Visible = true;
+            label2.Visible = true;
+            ColorCount.Visible = true;
 
             ShowImageInfo();
         }
@@ -160,6 +165,8 @@ namespace PixelLab.Forms
                 btnSaveImage.Visible = true;
                 color_systems.Visible = true;
                 grpImageInfo.Visible = true;
+                label2.Visible = true;
+                ColorCount.Visible = true;
 
                 ShowImageInfo();
             }
@@ -434,5 +441,18 @@ namespace PixelLab.Forms
 
         }
 
+        private void ColorCount_SelectedIndexChanged(object sender, EventArgs e) {
+            if (image_picture_box.Image == null) {
+                MessageBox.Show("Please select an image first.");
+                return;
+            }
+            if (ColorCount.SelectedIndex == 0) {
+                return;
+            }
+            int colorCount = int.Parse(ColorCount.SelectedItem.ToString());
+
+            Bitmap result = quantizeImg.Quantize(originalImage, colorCount);
+            image_picture_box.Image = result;
+        }
     }
 }
