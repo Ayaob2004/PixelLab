@@ -1,11 +1,10 @@
-﻿using PixelLab.Services.ColorSpaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PixelLab.Services.ColorSpaces
+namespace PixelLab.Services
 {
     ///تعبر عن النظام اللوني مستخدم ومعلومات عن قنواته 
     class ColorSpaceModel

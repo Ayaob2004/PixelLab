@@ -16,13 +16,17 @@ namespace PixelLab
         [STAThread]
         static void Main()
         {
-             Application.EnableVisualStyles();
-             Application.SetCompatibleTextRenderingDefault(false);
-             Application.Run(new formShowImg());
-           // Console.WriteLine(Environment.Is64BitProcess);
-           // Application.EnableVisualStyles();
-           // Application.SetCompatibleTextRenderingDefault(false);
-           // Application.Run(new ThreeDForm());
+            // Application.EnableVisualStyles();
+            // Application.SetCompatibleTextRenderingDefault(false);
+             //Application.Run(new formShowImg());
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            // Application.Run(new formShowImg());
+            Application.Run(new Forms.Form1());
+            //Console.WriteLine(Environment.Is64BitProcess);
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new ThreeDForm());
         }
     }
 }

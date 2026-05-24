@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PixelLab.Services.ColorSpaces
+namespace PixelLab.Services
 {
     //معلومات قناة لونية لوحدها 
     class ChannelInfo
@@ -13,7 +13,5 @@ namespace PixelLab.Services.ColorSpaces
         public string Name { get; set; }
         public Mat Data { get; set; }//  تخزن الصورة لقناة الواحدة(التي نستعرض معلوماته)ا
         public bool Enabled { get; set; } = true;
-        public int MinValue { get; set; }
-        public int MaxValue { get; set; }
     }
 }
